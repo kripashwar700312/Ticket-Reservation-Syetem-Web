@@ -1,0 +1,164 @@
+<div class="row">
+    <div class="col-sm-10">
+        <button class="btn btn-primary" (click)="navigateToDashboard()">Go to dashboard</button>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <h4>Reservation Detail</h4>
+        <ul>
+            <li>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Mode of Travel:</strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{reservationResponse?.travelMode}}
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>From City:</strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{reservationResponse?.fromCity}}
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>To City:</strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{reservationResponse?.toCity}}
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Departure Date:</strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{reservationResponse?.departureDate | date: 'dd/MM/yyyy'}}
+                    </div>
+                </div>
+
+            </li>
+            <li *ngIf="reservationResponse.returnDate">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Return Date:</strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{reservationResponse?.returnDate | date: 'dd/MM/yyyy'}}
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Departure Time:</strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{reservationResponse?.departureTime }}
+                    </div>
+                </div>
+            </li>
+            <li *ngIf="reservationResponse.returnTime">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Return Time:</strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{reservationResponse?.returnTime}}
+                    </div>
+                </div>
+            </li>
+            <li *ngIf="reservationResponse.kids">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>No of kid passanger:</strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{reservationResponse?.kids}}
+                    </div>
+                </div>
+            </li>
+            <li *ngIf="reservationResponse.adults">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>No of adult passanger:</strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{reservationResponse?.adults}}
+                    </div>
+                </div>
+            </li>
+            <li *ngIf="reservationResponse.seniour">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>No of seniour passanger:</strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{reservationResponse?.seniour}}
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Total no of passanger:</strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{totalPassenger}}
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Total no of passanger:</strong>
+                    </div>
+                    <div class="col-md-6">
+                        Rs. {{reservationResponse?.totalPrice}}
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Payment Status:</strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{reservationResponse?.paid?"PAID":"PAYMENT DUE"}}
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-md-6" *ngIf="!reservationResponse.paid">
+        <div class="login-form">
+            <form [formGroup]="paymentForm" (ngSubmit)="pay()" name="paymentForm">
+                <h2 class="text-center">Payment Details</h2>
+                <div class="form-group">
+                    <input type="text" formControlName="username" class="form-control" placeholder="Username"
+                        required="required">
+                </div>
+                <div class="form-group">
+                    <input type="password" formControlName="password" class="form-control" placeholder="Password"
+                        required="required">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Pay</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
